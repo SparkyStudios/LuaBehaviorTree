@@ -3,8 +3,7 @@ local Logger = require('src.Utils.Logger');
 
 local DecoratorNode = require("src.DecoratorNode");
 
---- Tick the child up to N times, as long as the child returns `success()`.
---- Interrupt the loop if the child returns `failure()` and, in that case, return `failure()` too.
+--- Tick the child up to N times, whatever the child returns `success()` or `failure()` on each iteration.
 --- If the child returns `running()`, this node returns `running()` too.
 ---@class RepeatNode: DecoratorNode
 ---@field count number The number of iterations.
@@ -16,18 +15,11 @@ function RepeatNode:start()
 end
 
 function RepeatNode:success()
-    if self._count < self.count then
-        self._count = self._count + 1;
-        self._parent:running();
-    else
-        self._count = 0;
-        self._parent:success();
-    end
+    self:_iterate()
 end
 
 function RepeatNode:failure()
-    self._count = 1;
-    self._parent:failure();
+    self:_iterate()
 end
 
 --- Updates the `count` value of this node.
@@ -48,6 +40,16 @@ function RepeatNode:_parseXmlNode(node, context)
     end
 
     self:setCount(node._attr.count);
+end
+
+function RepeatNode:_iterate()
+    if self._count < self.count then
+        self._count = self._count + 1;
+        self._parent:running();
+    else
+        self._count = 0;
+        self._parent:success();
+    end
 end
 
 return RepeatNode;

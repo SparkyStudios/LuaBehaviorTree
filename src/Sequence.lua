@@ -9,12 +9,11 @@ local BranchNode = require('src.BranchNode');
 local Sequence = class('Sequence', BranchNode);
 
 function Sequence:success()
-    self._running = false;
+    BranchNode.success(self);
     self._actualTask = self._actualTask + 1;
     if self._actualTask <= #self.children then
         self:_tick();
     else
-        BranchNode.success(self);
         self._parent:success();
     end
 end

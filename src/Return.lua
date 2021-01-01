@@ -10,13 +10,13 @@ local Return = class('Return', Action);
 
 function Return:tick()
     if self.value == "success" then
-        return self._parent:success();
+        return self:success();
     elseif self.value == "failure" then
-        return self._parent:failure();
+        return self:failure();
     elseif self.value == "running" then
-        return self._parent:running();
+        return self:running();
     else
-        return self._parent:success();
+        return self:success();
     end
 end
 

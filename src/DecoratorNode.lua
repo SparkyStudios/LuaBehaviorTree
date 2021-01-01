@@ -46,7 +46,7 @@ function DecoratorNode:_parseXmlNode(node, context)
     end
 
     if node._children.n ~= 1 then
-        Logger.error('A DecoratorNode can only have one children.');
+        Logger.error('A DecoratorNode must only have one children.');
     end
 
     local current = node._children[1];

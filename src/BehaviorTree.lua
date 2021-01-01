@@ -19,18 +19,20 @@ local Random = require "src.Random"
 local ReactiveFallback = require "src.ReactiveFallback"
 local ReactiveSequence = require "src.ReactiveSequence"
 local RepeatNode = require "src.RepeatNode"
+local RepeatUntilFailureNode = require "src.RepeatUntilFailureNode"
+local RepeatUntilSuccessNode = require "src.RepeatUntilSuccessNode"
 local RetryNode = require "src.RetryNode"
 local Sequence = require "src.Sequence"
 local SequenceStar = require "src.SequenceStar"
 local StateMachine = require "src.StateMachine"
-local RepeatUntilFailureNode = require "src.RepeatUntilFailureNode"
-local RepeatUntilSuccessNode = require "src.RepeatUntilSuccessNode"
+local SubTree = require "src.SubTree"
 
 --- Creates a new behavior tree.
 ---@class BehaviorTree: Node
 ---@field root Node The root node of the tree.
 ---@field properties table The table of mutable properties of this tree.
 ---@field events table The table of events registered to this tree.
+---@field subtrees table The table of subtrees on this tree.
 local BehaviorTree = class('BehaviorTree', Node);
 
 BehaviorTree.Action = Action;
@@ -53,6 +55,7 @@ BehaviorTree.RetryNode = RetryNode;
 BehaviorTree.Sequence = Sequence;
 BehaviorTree.SequenceStar = SequenceStar;
 BehaviorTree.StateMachine = StateMachine;
+BehaviorTree.SubTree = SubTree;
 
 --- Parses an XML string to a valid behavior tree.
 ---@param xml string The XML string to parse.
@@ -82,6 +85,11 @@ function BehaviorTree:initialize(config)
     -- Ensures that events field always have a value.
     if self.events == nil then
         self.events = {};
+    end
+
+    -- Ensures that subtrees field always have a value.
+    if self.subtrees == nil then
+        self.subtrees = {};
     end
 
     self._propsSubject = Rx.BehaviorSubject.create();
@@ -227,6 +235,9 @@ function BehaviorTree:_parseXmlNode(node, context)
             -- If it's the list of events
             elseif current._name == "Events" then
                 self:_parseEventsXmlNode(current, context);
+            -- If it's the list of subtrees
+            elseif current._name == "SubTrees" then
+                self:_parseSubTreesXmlNode(current, context);
             -- If it's the root node
             elseif current._name == "Root" then
                 self:_parseRootXmlNode(current, context);
@@ -277,6 +288,38 @@ function BehaviorTree:_parseEventsXmlNode(node, context)
         -- Register the property with a nil value.
         table.insert(self.events, event);
     end
+end
+
+function BehaviorTree:_parseSubTreesXmlNode(node, context)
+    local subTrees = {};
+
+    for i = 1, node._children.n, 1 do
+        local current = node._children[i];
+
+        if current._name ~= "SubTree" then
+            Logger.error("Encountered an unexpected node inside of a SubTrees list. Only SubTree nodes are allowed.");
+        end
+
+        if current._children.n ~= 1 then
+            Logger.error("A SubTree node must contain only one child node.");
+        end
+
+        if not current._attr or not current._attr.id then
+            Logger.error("A SubTree node must have an id attribute.");
+        end
+
+        local subTreeNode = current._children[1];
+        local subTree = Node._parseXmlNode(self, subTreeNode, context);
+
+        if subTree then
+            subTree:_parseXmlNode(subTreeNode, context);
+        end
+
+        subTrees[current._attr.id] = subTree;
+    end
+
+    -- Register subtrees
+    self.subtrees = subTrees;
 end
 
 function BehaviorTree:_parseRootXmlNode(node, context)

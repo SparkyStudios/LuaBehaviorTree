@@ -9,7 +9,7 @@ local Fallback = require('src.Fallback');
 local ReactiveFallback = class('ReactiveFallback', Fallback);
 
 function ReactiveFallback:running()
-    Fallback.running(self);
+    self._running = true;
     self._actualTask = 1;
     self._parent:running();
 end

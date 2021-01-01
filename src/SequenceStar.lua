@@ -7,12 +7,10 @@ local SequenceStar = class('SequenceStar', Sequence);
 
 function SequenceStar:failure()
     Sequence.running(self);
-    self._parent:running();
 end
 
 function SequenceStar:running()
     Sequence.running(self);
-    self._parent:running();
 end
 
 return SequenceStar;

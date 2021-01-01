@@ -21,7 +21,6 @@ local ReactiveSequence = require('src.ReactiveSequence');
 local RepeatNode = require('src.RepeatNode');
 local RepeatUntilFailureNode = require('src.RepeatUntilFailureNode');
 local RepeatUntilSuccessNode = require('src.RepeatUntilSuccessNode');
-local RetryNode = require('src.RetryNode');
 local Sequence = require('src.Sequence');
 local SequenceStar = require('src.SequenceStar');
 local StateMachine = require('src.StateMachine');
@@ -51,7 +50,6 @@ BehaviorTree.ReactiveSequence = ReactiveSequence;
 BehaviorTree.RepeatNode = RepeatNode;
 BehaviorTree.RepeatUntilFailureNode = RepeatUntilFailureNode;
 BehaviorTree.RepeatUntilSuccessNode = RepeatUntilSuccessNode;
-BehaviorTree.RetryNode = RetryNode;
 BehaviorTree.Sequence = Sequence;
 BehaviorTree.SequenceStar = SequenceStar;
 BehaviorTree.StateMachine = StateMachine;
@@ -311,10 +309,6 @@ function BehaviorTree:_parseSubTreesXmlNode(node, context)
         local subTreeNode = current._children[1];
         local subTree = Node._parseXmlNode(self, subTreeNode, context);
 
-        if subTree then
-            subTree:_parseXmlNode(subTreeNode, context);
-        end
-
         subTrees[current._attr.id] = subTree;
     end
 
@@ -329,10 +323,6 @@ function BehaviorTree:_parseRootXmlNode(node, context)
 
     local current = node._children[1];
     local root = Node._parseXmlNode(self, current, context);
-
-    if root then
-        root:_parseXmlNode(current, context);
-    end
 
     -- Register the root node
     self.root = root;

@@ -1,6 +1,7 @@
 local class = require('src.Utils.MiddleClass');
+local Logger = require('src.Utils.Logger');
+
 local Registry = require('src.NodeRegistry');
-local Logger = require "src.Utils.Logger";
 
 --- Represents a basic node without functionalities in a behavior tree.
 ---@class Node: MiddleClass
@@ -120,7 +121,7 @@ end
 ---@param node table The XML node to parse.
 ---@param context any The XML parser context.
 function Node:_parseXmlNode(node, context)
-    local BehaviorTree = require 'src.BehaviorTree';
+    local BehaviorTree = require('src.BehaviorTree');
 
     -- Checks if it's a predefined node
     if BehaviorTree[node._name] ~= nil then

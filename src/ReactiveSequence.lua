@@ -1,4 +1,5 @@
 local class = require('src.Utils.MiddleClass');
+
 local Sequence = require('src.Sequence');
 
 --- Executes each child nodes sequentially until one node returns `fail()`,

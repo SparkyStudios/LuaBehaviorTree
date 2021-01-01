@@ -1,6 +1,7 @@
-local class = require("src.utils.MiddleClass");
+local class = require("src.Utils.MiddleClass");
+local Logger = require('src.Utils.Logger');
+
 local Node = require("src.Node");
-local Logger = require "src.Utils.Logger"
 
 --- Emit an event registered to the behavior tree.
 ---@class EmitEvent: Node

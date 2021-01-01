@@ -1,9 +1,10 @@
-local Logger = require "src.Utils.Logger";
-local class = require "src.Utils.MiddleClass";
-local BranchNode = require "src.BranchNode";
-local State = require "src.State";
-local Transition = require "src.Transition"
-local NodeRegistry = require "src.NodeRegistry"
+local class = require('src.Utils.MiddleClass');
+local Logger = require('src.Utils.Logger');
+
+local BranchNode = require('src.BranchNode');
+local State = require('src.State');
+local Transition = require('src.Transition');
+local NodeRegistry = require('src.NodeRegistry');
 
 --- The StateMachine is a composite node allowed to have one or more children. The children of a StateMachine node
 --- must be of the type State.

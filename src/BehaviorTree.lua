@@ -1,31 +1,31 @@
 local class = require('src.Utils.MiddleClass');
 local Rx = require('src.Utils.Rx');
 local EventEmitter = require('src.Utils.Events');
-local XmlDomHandler = require 'src.Utils.XML.Dom'
-local Xml2Lua = require 'src.Utils.XML.Xml2Lua'
-local Logger = require "src.Utils.Logger"
+local XmlDomHandler = require('src.Utils.XML.Dom');
+local Xml2Lua = require('src.Utils.XML.Xml2Lua');
+local Logger = require('src.Utils.Logger');
 
 local Registry = require('src.NodeRegistry');
 local Node = require('src.Node');
 local Action = require('src.Action');
-local BranchNode = require "src.BranchNode"
-local DecoratorNode = require "src.DecoratorNode"
-local EmitEvent = require "src.EmitEvent"
-local Fallback = require "src.Fallback"
-local ForceSuccessNode = require "src.ForceSuccessNode"
-local ForceFailureNode = require "src.ForceFailureNode"
-local InvertorNode = require "src.InvertorNode"
-local Random = require "src.Random"
-local ReactiveFallback = require "src.ReactiveFallback"
-local ReactiveSequence = require "src.ReactiveSequence"
-local RepeatNode = require "src.RepeatNode"
-local RepeatUntilFailureNode = require "src.RepeatUntilFailureNode"
-local RepeatUntilSuccessNode = require "src.RepeatUntilSuccessNode"
-local RetryNode = require "src.RetryNode"
-local Sequence = require "src.Sequence"
-local SequenceStar = require "src.SequenceStar"
-local StateMachine = require "src.StateMachine"
-local SubTree = require "src.SubTree"
+local BranchNode = require('src.BranchNode');
+local DecoratorNode = require('src.DecoratorNode');
+local EmitEvent = require('src.EmitEvent');
+local Fallback = require('src.Fallback');
+local ForceSuccessNode = require('src.ForceSuccessNode');
+local ForceFailureNode = require('src.ForceFailureNode');
+local InvertorNode = require('src.InvertorNode');
+local Random = require('src.Random');
+local ReactiveFallback = require('src.ReactiveFallback');
+local ReactiveSequence = require('src.ReactiveSequence');
+local RepeatNode = require('src.RepeatNode');
+local RepeatUntilFailureNode = require('src.RepeatUntilFailureNode');
+local RepeatUntilSuccessNode = require('src.RepeatUntilSuccessNode');
+local RetryNode = require('src.RetryNode');
+local Sequence = require('src.Sequence');
+local SequenceStar = require('src.SequenceStar');
+local StateMachine = require('src.StateMachine');
+local SubTree = require('src.SubTree');
 
 --- Creates a new behavior tree.
 ---@class BehaviorTree: Node

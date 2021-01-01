@@ -1,6 +1,7 @@
-local class = require "src.Utils.MiddleClass"
-local Logger = require "src.Utils.Logger"
-local Node = require "src.Node"
+local class = require('src.Utils.MiddleClass');
+local Logger = require('src.Utils.Logger');
+
+local Node = require('src.Node');
 
 --- Adds a reference to a subtree in the behavior tree, to execute a same behavior
 --- in many different parts of the tree.

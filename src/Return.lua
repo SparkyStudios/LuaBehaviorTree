@@ -1,6 +1,7 @@
-local class = require "src.Utils.MiddleClass"
-local Action = require "src.Action"
-local Logger = require "src.Utils.Logger"
+local class = require('src.Utils.MiddleClass');
+local Logger = require('src.Utils.Logger');
+
+local Action = require('src.Action');
 
 --- Returns a specific result.
 ---@class Return: Action

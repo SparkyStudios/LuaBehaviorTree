@@ -1,4 +1,5 @@
 local class = require('src.Utils.MiddleClass');
+
 local BranchNode  = require('src.BranchNode');
 
 --- Selects randomly a node from its children and execute it.

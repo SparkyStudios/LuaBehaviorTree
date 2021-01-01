@@ -1,5 +1,6 @@
-local class = require "src.utils.MiddleClass";
-local DecoratorNode = require "src.DecoratorNode";
+local class = require('src.Utils.MiddleClass');
+
+local DecoratorNode = require('src.DecoratorNode');
 
 --- The State node is the basic block of a StateMachine node. Each State node must have a BehaviorTree node and may
 --- also have a Transitions block.

@@ -1,4 +1,5 @@
 local class = require('src.Utils.MiddleClass');
+
 local DecoratorNode = require('src.DecoratorNode');
 
 --- Forces the result of its child node to be `success()`.

@@ -1,5 +1,3 @@
-local MiddleClass = require "src.Utils.MiddleClass";
-
 --- Effectively stores the list of registered nodes.
 local _REGISTERED_NODES = {};
 
@@ -29,7 +27,7 @@ end
 --- Returns the registered node with the given id.
 ---@param id string|Node
 function Registry.getNode(id)
-    local Node = require "src.Node";
+    local Node = require('src.Node');
 
     if type(id) == 'string' then
         local node = _REGISTERED_NODES[id];

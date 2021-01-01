@@ -1,7 +1,6 @@
 local class = require('src.Utils.MiddleClass');
-local Logger = require "src.Utils.Logger"
+
 local BranchNode = require('src.BranchNode');
-local Node = require "src.Node"
 
 --- Executes each child nodes sequentially until one node returns `success()`,
 --- then, iteself returns `success()`. If every child nodes returns `failure()`,

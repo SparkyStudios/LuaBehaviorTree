@@ -1,7 +1,8 @@
 local class = require('src.Utils.MiddleClass');
+local Logger = require('src.Utils.Logger');
+
 local Registry = require('src.NodeRegistry');
 local Node = require('src.Node');
-local Logger = require "src.Utils.Logger"
 
 --- Represents a branch node of a behavior tree.
 ---@class BranchNode: Node

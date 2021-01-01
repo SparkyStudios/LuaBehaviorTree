@@ -1,4 +1,5 @@
 local class = require("src.Utils.MiddleClass");
+
 local DecoratorNode = require("src.DecoratorNode");
 
 --- Repeats the execution of the given child node until it returns `success()`

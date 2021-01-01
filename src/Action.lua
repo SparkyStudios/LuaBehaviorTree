@@ -1,5 +1,6 @@
 local class = require('src.Utils.MiddleClass');
-local Logger = require "src.Utils.Logger"
+local Logger = require('src.Utils.Logger');
+
 local Node = require('src.Node');
 
 --- An action node, used to execute a specific thing.

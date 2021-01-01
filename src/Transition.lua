@@ -1,6 +1,7 @@
-local class = require "src.utils.MiddleClass"
-local Logger = require "src.Utils.Logger"
-local Node = require "src.Node"
+local class = require('src.Utils.MiddleClass');
+local Logger = require('src.Utils.Logger');
+
+local Node = require('src.Node');
 
 --- The transition node is used in the State node to define the set of transitions from/to
 --- other states in the same StateMachine node.

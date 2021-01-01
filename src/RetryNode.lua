@@ -1,4 +1,5 @@
 local class = require("src.Utils.middleclass");
+
 local DecoratorNode = require("src.DecoratorNode");
 
 --- Tick the child up to N times, as long as the child returns `failure()`.

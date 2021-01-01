@@ -1,5 +1,6 @@
 local class = require("src.Utils.middleclass");
-local Logger = require "src.Utils.Logger";
+local Logger = require('src.Utils.Logger');
+
 local DecoratorNode = require("src.DecoratorNode");
 
 --- Tick the child up to N times, as long as the child returns `success()`.
@@ -11,27 +12,27 @@ local RepeatNode = class('RepeatNode', DecoratorNode);
 
 function RepeatNode:start()
     DecoratorNode.start(self);
-    self._countLeft = self.count;
+    self._count = 1;
 end
 
 function RepeatNode:success()
-    if self._countLeft > 1 then
+    if self._count < self.count then
+        self._count = self._count + 1;
         self._parent:running();
-        self._countLeft = self._countLeft - 1;
     else
+        self._count = 0;
         self._parent:success();
-        self._countLeft = self.count;
     end
 end
 
 function RepeatNode:failure()
+    self._count = 1;
     self._parent:failure();
-    self._countLeft = self.count;
 end
 
 --- Updates the `count` value of this node.
 ---@param count number The number of iterations.
-function RepeatNode:setMaxCount(count)
+function RepeatNode:setCount(count)
     if type(count) == "string" then
         self.count = tonumber(count);
     elseif type(count) == "number" then
@@ -46,7 +47,7 @@ function RepeatNode:_parseXmlNode(node, context)
         Logger.error('The RepeatNode node must have a count attribute.');
     end
 
-    self:setMaxCount(node._attr.count);
+    self:setCount(node._attr.count);
 end
 
 return RepeatNode;

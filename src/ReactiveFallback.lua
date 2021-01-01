@@ -1,4 +1,5 @@
 local class = require('src.Utils.MiddleClass');
+
 local Fallback = require('src.Fallback');
 
 --- Executes each child nodes sequentially until one node returns `success()`,

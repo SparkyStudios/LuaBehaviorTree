@@ -1,4 +1,5 @@
 local class = require('src.Utils.MiddleClass');
+
 local DecoratorNode = require('src.DecoratorNode');
 
 --- Inverts the result of its child node. If the child return `running()`,

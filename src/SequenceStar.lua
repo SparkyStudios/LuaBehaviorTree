@@ -1,4 +1,5 @@
 local class = require('src.Utils.MiddleClass');
+
 local Sequence = require('src.Sequence');
 
 --- Use this sequence node when you don't want to tick children again that already returned `success()`.

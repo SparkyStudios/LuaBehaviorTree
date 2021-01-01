@@ -137,8 +137,8 @@ function BehaviorTree:tick(subject)
         self._running = true;
         self:setSubject(subject or self.subject);
         self._rootNode = Registry.getNode(self.root);
-        self._rootNode:setSubject(self.subject);
         self._rootNode:_setParent(self);
+        self._rootNode:setSubject(self.subject);
         self._rootNode:start();
         self._rootNode:_callTick();
     end

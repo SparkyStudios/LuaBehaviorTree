@@ -54,8 +54,8 @@ end
 
 function BranchNode:_setCurrentNode(node)
     self._node = Registry.getNode(self.children[node]);
-    self._node:setSubject(self.subject);
     self._node:_setParent(self);
+    self._node:setSubject(self.subject);
     self._node:start();
 end
 

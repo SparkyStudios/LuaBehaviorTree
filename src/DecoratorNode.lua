@@ -52,10 +52,8 @@ function DecoratorNode:_parseXmlNode(node, context)
 
     local current = node._children[1];
     local child = Node._parseXmlNode(self, current, context);
-    if child then
-        child:_parseXmlNode(current, context);
-        self.child = child;
-    end
+
+    self.child = child;
 end
 
 return DecoratorNode;

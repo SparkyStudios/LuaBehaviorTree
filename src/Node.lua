@@ -122,19 +122,30 @@ end
 ---@param context any The XML parser context.
 function Node:_parseXmlNode(node, context)
     local BehaviorTree = require('src.BehaviorTree');
+    local tree = self:getNearestBehaviorTreeNode();
+
+    local child = nil;
 
     -- Checks if it's a predefined node
     if BehaviorTree[node._name] ~= nil then
-        return BehaviorTree[node._name]:new();
+        child = BehaviorTree[node._name]:new();
     -- Checks if it's a registered node
     elseif Registry.registered(node._name) then
-        return Registry.getNode(node._name);
+        child = Registry.getNode(node._name);
+    -- Checks if it's a subtree proxy
+    elseif tree.subtrees[node._name] ~= nil then
+        -- Directly return the child because there is no need to parse the subtree again
+        return tree.subtrees[node._name];
     -- The node is not defined...
     else
         Logger.error("Undefined node encountered: " .. node._name .."."); -- TODO: Create an Nodes/Behaviors nodes ?
     end
 
-    return nil;
+    if child then
+        child:_parseXmlNode(node, context);
+    end
+
+    return child;
 end
 
 return Node;

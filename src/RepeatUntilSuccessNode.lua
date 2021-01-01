@@ -1,4 +1,5 @@
 local class = require("src.Utils.MiddleClass");
+local Logger = require('src.Utils.Logger');
 
 local DecoratorNode = require("src.DecoratorNode");
 
@@ -41,6 +42,16 @@ function RepeatUntilSuccessNode:setMaxCount(maxCount)
     elseif type(maxCount) == "number" then
         self.maxCount = maxCount;
     end
+end
+
+function RepeatUntilSuccessNode:_parseXmlNode(node, context)
+    DecoratorNode._parseXmlNode(self, node, context);
+
+    if not node._attr or not node._attr.maxCount then
+        Logger.error('The RepeatUntilSuccessNode node must have a maxCount attribute.');
+    end
+
+    self:setMaxCount(node._attr.maxCount);
 end
 
 return RepeatUntilSuccessNode;

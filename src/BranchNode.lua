@@ -71,7 +71,6 @@ function BranchNode:_parseXmlNode(node, context)
         local current = node._children[i];
         local child = Node._parseXmlNode(self, current, context);
         if child then
-            child:_parseXmlNode(current, context);
             table.insert(children, child);
         end
     end

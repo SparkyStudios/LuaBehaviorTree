@@ -9,7 +9,7 @@ local Action = class('Action', Node);
 
 function Action:_parseXmlNode(node, context)
     if node._children.n ~= 0 then
-        Logger.error('The Action node cannot have children.');
+        Logger.error('The ' .. self.class.name .. ' node cannot have children.');
     end
 
     -- Copy attributes in node fields

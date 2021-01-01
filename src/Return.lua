@@ -21,19 +21,11 @@ function Return:tick()
 end
 
 function Return:_parseXmlNode(node, context)
-    if node._name ~= self.class.name then
-        Logger.error('Tried to parse an invalid node as a ' .. self.class.name .. ' node.');
-    end
-
-    if node._children.n ~= 0 then
-        Logger.error('The Return node cannot have children.');
-    end
-
     if not node._attr or not node._attr.value then
         Logger.error('The Return node must have a value attribute.');
     end
 
-    self.value = node._attr.value;
+    Action._parseXmlNode(self, node, context);
 end
 
 return Return;

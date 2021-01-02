@@ -10,7 +10,7 @@ local Sequence = require('src.Sequence');
 local ReactiveSequence = class('ReactiveSequence', Sequence);
 
 function ReactiveSequence:running()
-    self._running = true;
+    self._running = false;
     self._actualTask = 1;
     self._parent:running();
 end

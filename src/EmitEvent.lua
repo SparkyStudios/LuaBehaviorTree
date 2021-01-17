@@ -1,12 +1,12 @@
 local class = require("src.Utils.MiddleClass");
 local Logger = require('src.Utils.Logger');
 
-local Node = require("src.Node");
+local Action = require("src.Action");
 
 --- Emit an event registered to the behavior tree.
----@class EmitEvent: Node
+---@class EmitEvent: Action
 ---@field name string The name of the event.
-local EmitEvent = class('EmitEvent', Node);
+local EmitEvent = class('EmitEvent', Action);
 
 function EmitEvent:tick()
     if self.name == nil then
@@ -25,19 +25,11 @@ function EmitEvent:tick()
 end
 
 function EmitEvent:_parseXmlNode(node, context)
-    if node._name ~= self.class.name then
-        Logger.error('Tried to parse an invalid node as a ' .. self.class.name .. ' node.');
-    end
-
-    if node._children.n ~= 0 then
-        Logger.error('The EmitEvent node cannot have children.');
-    end
-
     if not node._attr or not node._attr.name then
         Logger.error('The EmitEvent node must have a name attribute.');
     end
 
-    self.name = node._attr.name;
+    Action._parseXmlNode(self, node, context);
 end
 
 return EmitEvent;
